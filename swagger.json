@@ -1,0 +1,189 @@
+{
+	"openapi": "3.0.1",
+	"info": {
+		"version": "2.0.2",
+		"title": "Event Planner API",
+		"description": "The API for Event Planner project"
+	},
+	"servers": [
+		{ "url": "http://localhost:4000/api" },
+		{ "url": "https://eventplanner-api.onrender.com/api" }
+	],
+	"tags": [
+		{
+			"name": "Register",
+			"description": "Register member for event"
+		},
+		{
+			"name": "Event",
+			"description": "Search all members of event"
+		}
+	],
+	"paths": {
+		"/register": {
+			"post": {
+				"tags": ["Register"],
+				"summary": "Member registration",
+				"requestBody": {
+					"description": "Registration object",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Registration"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Successfully registered",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"_id": {
+											"type": "string",
+											"example": "0589600"
+										},
+										"name": {
+											"type": "string",
+											"example": "Senior Markus"
+										},
+										"email": {
+											"type": "string",
+											"example": "markus@gmail.com"
+										},
+										"dateBth": {
+											"type": "string",
+											"example": "12.12.1998"
+										},
+										"hear": {
+											"type": "string",
+											"example": "friends"
+										},
+										"event": {
+											"type": "string",
+											"example": "82071"
+										}
+									},
+									"required": ["_id", "name", "email", "dateBth", "hear", "event"]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/event/{eventId}": {
+			"get": {
+				"tags": ["Event"],
+				"summary": "Get all members of event",
+				"parameters": [
+					{
+						"name": "eventId",
+						"in": "path",
+						"description": "ID of the event",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "82071"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/Member"
+									}
+								},
+								"example": [
+									{
+										"name": "Senior Markus",
+										"email": "markus@gmail.com",
+										"dateBth": "12.12.1998",
+										"hear": "friends",
+										"event": "82071"
+									},
+									{
+										"name": "Junior John",
+										"email": "john@gmail.com",
+										"dateBth": "01.01.2000",
+										"hear": "advertisement",
+										"event": "82071"
+									}
+								]
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"Registration": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"example": "Senior Markus"
+					},
+					"email": {
+						"type": "string",
+						"example": "markus@gmail.com"
+					},
+					"dateBth": {
+						"type": "string",
+						"example": "12.12.1998"
+					},
+					"hear": {
+						"type": "string",
+						"example": "friends"
+					},
+					"event": {
+						"type": "string",
+						"example": "82071"
+					}
+				},
+				"required": ["name", "email", "dateBth", "hear", "event"]
+			},
+			"Member": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string",
+						"example": "0589600"
+					},
+					"name": {
+						"type": "string",
+						"example": "Senior Markus"
+					},
+					"email": {
+						"type": "string",
+						"example": "markus@gmail.com"
+					},
+					"dateBth": {
+						"type": "string",
+						"example": "12.12.1998"
+					},
+					"hear": {
+						"type": "string",
+						"example": "friends"
+					},
+					"event": {
+						"type": "string",
+						"example": "82071"
+					}
+				},
+				"required": ["_id", "name", "email", "dateBth", "hear", "event"]
+			}
+		}
+	}
+}
