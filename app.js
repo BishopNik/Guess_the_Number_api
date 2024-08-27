@@ -7,8 +7,8 @@ import dotenv from 'dotenv';
 
 import router from './routes/api/router.js';
 
-// import swaggerUi from 'swagger-ui-express';
-// import swaggerDocument from './swagger.json' with { type: 'json' };
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger.json' with { type: 'json' };
 
 dotenv.config();
 
@@ -21,7 +21,7 @@ app.use(cors());
 app.use(express.json());
 
 // Api-docs
-// app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // main router
 app.use('/api', router);
